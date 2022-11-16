@@ -1,0 +1,28 @@
+
+    <h2>Transaction History</h2>
+
+
+    <table>
+        <thead id="head">
+            <tr>
+                
+                <th>Transaction Type </th>
+                <th>Transaction Amount </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let t of transaction">
+                
+                <th>{{t.type}}</th>
+                <th>{{t.amount}}</th>
+            </tr>
+             
+        </tbody>
+    </table>
+    
+
+    <a routerLink="/dashboard">Back to Home</a>
+
+
+    
+

@@ -1,0 +1,27 @@
+<section>
+    <div class="container">
+        <div class="body col-lg-7">
+            <div class="row">
+                <div class="logo">
+                    <img class="center" src="../../assets/iconImage.jpg" alt="">
+                </div>
+            </div>
+            <div class="row">
+                <h3>Login Page</h3>
+            </div>
+            <form action="" >
+               
+                <input type="text" name="acno" placeholder="Account Number" id="acno" [(ngModel)]="acno"  class="form-control">
+                <input type="password" name="psw" placeholder="password" [(ngModel)]="psw" id="psw"  class="form-control">
+                
+            </form>
+            
+            <div class="row">
+                <button class="btn btn-primary" (click)="login()">Login</button>
+            </div>
+            <div class="row" >
+              <p>Don't have an Account <a routerLink="/register">Create new Acccount</a></p>
+            </div>
+        </div>
+    </div>
+</section>

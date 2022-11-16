@@ -1,0 +1,31 @@
+h2{
+    text-align: center;
+    margin-top: 100px;
+    color: blue;
+}
+table,th,tr{
+    border: 2px black ;
+    margin-left: auto;
+    padding: 20px;
+    margin-right: auto;
+    margin-top: 50px;
+}
+#head{
+    background-color: rgb(94, 33, 249);
+    border-radius: 30px;
+    color: aliceblue;
+}
+table{
+    box-shadow: 5px 10px 18px #888888;
+    border-radius: 20px;
+}
+a{
+    text-decoration: none;
+    margin-left: 47%;
+    margin-top: 30px;  
+    font-weight: bolder;
+    font-size: x-large;  
+}
+th{
+    width: 40px;
+}
