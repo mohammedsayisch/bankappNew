@@ -48,4 +48,8 @@ button{
 }
 a{
     text-decoration: none;
+    color: red;
+}
+.style1{
+    opacity: 0;
 }

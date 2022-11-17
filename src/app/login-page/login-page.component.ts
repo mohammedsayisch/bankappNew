@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../service/data.service';
 
@@ -11,24 +12,39 @@ export class LoginPageComponent implements OnInit {
   ayim = "Your Perfect Banking Partner"    //string Intrpolation Methode Example
   acnt="Enter Your Account Number"        //Property Binding Methode Examlpe
   
+  LoginForm=this.fb.group({ //group   //* --regular expession
+       
+    acno:['',[Validators.required,Validators.pattern('[0-9]*')]], //array
+    psw:['',[Validators.required,Validators.pattern('[0-9]*')]]
+
+    //controll go to html page
+
+  })
  
   // router :- variable of login
   //Router :- it is class of navgateByUrl
-  constructor(private router:Router ,private ds:DataService) { }
+  constructor(private router:Router,private ds:DataService,private fb:FormBuilder) { }
 
   ngOnInit(): void {
   }
   acno=''
   psw=''
   login(){
-    var acno = this.acno
-    var psw = this.psw
+    
+    var acno = this.LoginForm.value.acno
+    var psw = this.LoginForm.value.psw
     const result = this.ds.login(acno,psw)
+    if(this.LoginForm.valid){
    if(result){
     
     alert('Login Success')
     this.router.navigateByUrl('dashboard')
    }
+  }else{
+    alert('login Failed')
+    console.log(this.LoginForm.get('acno')?.errors);
+    
+  }
     
   }
   // login(a:any,p:any){

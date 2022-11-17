@@ -8,6 +8,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TransctionComponent } from './transction/transction.component';
+import { DeleteComponent } from './delete/delete.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { TransctionComponent } from './transction/transction.component';
     RegisterComponent,
     DashboardComponent,
     TransctionComponent,
+    DeleteComponent,
     
   ],
   imports: [

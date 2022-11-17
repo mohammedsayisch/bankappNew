@@ -1,5 +1,7 @@
+<input type="button" value="Logout" (click)="logout()" class="btn btn-danger btn-lg" style="float: right ; margin-top: 30px; margin-right: 20px;">
+<input type="button" value="Delete Account" (click)="Delete()" class="btn btn-info btn-lg" style="float: right ; margin-top: 30px; margin-right: 20px;">
 
-        
+   
 <div class="section">
     <h1>Welcome {{user}}</h1>
     <div>
@@ -11,6 +13,8 @@
             <a (click)="balance()">View Balance</a>
         </div>
     </div>
+    <app-delete [item]="acno" (click)="onCancel()"></app-delete>  
+    <div class="parant" [ngClass]="acno ? 'style1':''">
     <div class="child">
     <div class="row">
         <div class="container">
@@ -23,10 +27,19 @@
                 <div class="row">
                     <h3>Deposite</h3>
                 </div>
-                <form action="">
-                    <input type="text" name="dep_acno" id="depo_acno" [(ngModel)]="acno1" placeholder="Account Number" class="form-control">
-                    <input type="password" id="depo_psw" name="psw" [(ngModel)]="psw1" placeholder="password" class="form-control">
-                    <input type="text" name="dep_amount" id="depo_amount" [(ngModel)]="amount1" class="form-control" placeholder="Amount" >
+                <form [formGroup]="depositeForm" action="">
+                    <input type="text" name="dep_acno" id="depo_acno" formControlName="acno1" placeholder="Account Number" class="form-control">
+                    <div *ngIf="this.depositeForm.get('acno1')?.errors && this.depositeForm.get('acno1')?.touched " style="text-align: center; color: red;"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-octagon-fill" viewBox="0 0 16 16">
+                        <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                      </svg> invalued account number</div>
+                    <input type="password" id="depo_psw" name="depo_psw" formControlName="psw1" placeholder="password" class="form-control">
+                    <div *ngIf="this.withdrawForm.get('psw1')?.errors && this.withdrawForm.get('psw1')?.touched " style="text-align: center; color: red;"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-octagon-fill" viewBox="0 0 16 16">
+                        <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                      </svg> invalued password</div>
+                    <input type="text" name="dep_amount" id="depo_amount" formControlName="amount1" class="form-control" placeholder="Amount" >
+                    <div *ngIf="this.depositeForm.get('amount1')?.errors && this.depositeForm.get('amount1')?.touched " style="text-align: center; color: red;"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-octagon-fill" viewBox="0 0 16 16">
+                        <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                      </svg> Enter Currect Amount</div>
     
                     <div class="row">
                         <button class="btn btn-primary" type="button" (click)="deposite()">Deposite</button>
@@ -53,10 +66,19 @@
                 <div class="row">
                     <h3>Withdraw</h3>
                 </div>
-                <form action="">
-                    <input type="text" name="dep_acno" id="wd_acno" [(ngModel)]="acno" placeholder="Account Number" class="form-control">
-                    <input type="password" id="wd_psw" name="psw" [(ngModel)]="psw" placeholder="password" class="form-control">
-                    <input type="text" name="wd_amount" id="depo_amount" [(ngModel)]="amount" class="form-control" placeholder="Amount" >
+                <form [formGroup]="withdrawForm" action="">
+                    <input type="text" name="dep_acno" id="wd_acno" formControlName="acno" placeholder="Account Number" class="form-control">
+                    <div *ngIf="this.withdrawForm.get('acno')?.errors && this.withdrawForm.get('acno')?.touched " style="text-align: center; color: red;"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-octagon-fill" viewBox="0 0 16 16">
+                        <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                      </svg> invalued acount number</div>
+                    <input type="password" id="wd_psw" name="psw" formControlName="psw" placeholder="password" class="form-control">
+                    <div *ngIf="this.withdrawForm.get('psw')?.errors && this.withdrawForm.get('psw')?.touched " style="text-align: center; color: red;"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-octagon-fill" viewBox="0 0 16 16">
+                        <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                      </svg> invalued password</div>
+                    <input type="text" name="wd_amount" id="depo_amount" formControlName="amount" class="form-control" placeholder="Amount" >
+                    <div *ngIf="this.withdrawForm.get('amount')?.errors && this.withdrawForm.get('amount')?.touched " style="text-align: center; color: red;"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-octagon-fill" viewBox="0 0 16 16">
+                        <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                      </svg> enter currect amount</div>
     
                     <div class="row">
                         <button class="btn btn-primary" type="button" (click)="withdraw()">Withdraw</button>
@@ -67,6 +89,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
     

@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+
+  import { Injectable } from '@angular/core';
 import { debounceTime } from 'rxjs';
 
 @Injectable({
@@ -15,7 +16,34 @@ export class DataService {
     1003:{acno:1003,username:'Rithik',pasword:123,balance:1000000,transaction:[]}
 
   }
-  constructor() { }
+  constructor(){
+    this.getDetails()
+   }
+
+  saveDetails(){
+    if(this.userDetails){
+      localStorage.setItem('database',JSON.stringify(this.userDetails))
+    }
+    if(this.currentAcno){
+      localStorage.setItem('currentAcno',JSON.stringify(this.currentAcno))
+    }
+    if(this.currentUser){
+      localStorage.setItem('currentUser',JSON.stringify(this.currentUser))
+    }
+  }
+
+  getDetails(){
+    if(localStorage.getItem('database')){
+      this.userDetails = JSON.parse(localStorage.getItem('database')||'')
+    }
+    if(localStorage.getItem('currentAcno')){
+      this.currentAcno = JSON.parse(localStorage.getItem('currentAcno')||'')
+    }
+    if(localStorage.getItem('currentUser')){
+      this.currentUser = JSON.parse(localStorage.getItem('currentUser')||'')
+    }
+
+  }
   register(acno:any,username:any,pasword:any){
     var userDetails=this.userDetails
     if(acno in userDetails){
@@ -32,7 +60,7 @@ export class DataService {
         balance:0,
         transaction:[]
       }
-    
+      this.saveDetails()
       return true
     }
   }
@@ -44,6 +72,7 @@ export class DataService {
         
         this.currentAcno = acno
         //check the password user enter password and data base password
+        this.saveDetails()
         return true
       }else{
 
@@ -65,6 +94,7 @@ export class DataService {
           type:'Credit',
           amount
         })
+        this.saveDetails
         return userDetails[acno]['balance']
       }else{
         alert('Incurrect Password')
@@ -92,7 +122,7 @@ export class DataService {
           
         })
         console.log(userDetails);
-        
+        this.saveDetails()
         return userDetails[acno]['balance']
        }else{
         alert('Inffeciant Balance')
